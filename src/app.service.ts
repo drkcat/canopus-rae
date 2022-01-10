@@ -108,6 +108,7 @@ export class AppService {
         {
           statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
           message: exception.message,
+          stack: exception.stack,
         },
         exception.message,
       );

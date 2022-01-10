@@ -1,6 +1,7 @@
 export interface ErrorResponse {
   statusCode: number;
   message: string;
+  stack?: string;
 }
 
 export interface SearchPayload {
