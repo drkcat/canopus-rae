@@ -45,6 +45,12 @@ export class AppService {
           let idiom;
           if (line.hasClass('n2')) {
             resp.etymology = line.text();
+          } else if (line.hasClass('k5')) {
+            resp.complexForms.push({ expression: line.text(), meanings: [] });
+            idiom = true;
+          } else if (line.hasClass('k6')) {
+            resp.expressions.push({ expression: line.text(), meanings: [] });
+            idiom = false;
           } else if (line.hasClass('j') || line.hasClass('j2')) {
             const number = line.find('.n_acep').text().trim();
             const type = line.find('abbr.d').first().attr('title').trim();
@@ -62,12 +68,6 @@ export class AppService {
             });
             definition = definition.trim();
             resp.meanings.push({ number, type, country, definition });
-          } else if (line.hasClass('k5')) {
-            resp.complexForms.push({ expression: line.text() });
-            idiom = true;
-          } else if (line.hasClass('k6')) {
-            resp.expressions.push({ expression: line.text() });
-            idiom = false;
           } else if (line.hasClass('m')) {
             const number = line.find('.n_acep').text().trim();
             const type = line.find('abbr.d').first().attr('title').trim();
@@ -84,21 +84,19 @@ export class AppService {
             });
             definition = definition.trim();
             if (idiom) {
-              resp.complexForms[resp.complexForms.length - 1] = {
-                ...resp.complexForms[resp.complexForms.length - 1],
+              resp.complexForms[resp.complexForms.length - 1].meanings.push({
                 number,
                 type,
                 country,
                 definition,
-              };
+              });
             } else {
-              resp.expressions[resp.expressions.length - 1] = {
-                ...resp.expressions[resp.expressions.length - 1],
+              resp.expressions[resp.expressions.length - 1].meanings.push({
                 number,
                 type,
                 country,
                 definition,
-              };
+              });
             }
           }
         });

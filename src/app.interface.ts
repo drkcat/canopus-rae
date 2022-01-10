@@ -24,8 +24,5 @@ export interface Meaning {
 
 export interface Expression {
   expression: string;
-  number?: string;
-  type?: string;
-  country?: string | null;
-  definition?: string;
+  meanings: Meaning[];
 }
