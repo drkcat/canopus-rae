@@ -52,11 +52,11 @@ export class AppService {
             resp.expressions.push({ expression: line.text(), meanings: [] });
             idiom = false;
           } else if (line.hasClass('j') || line.hasClass('j2')) {
-            const number = line.find('.n_acep').text().trim();
-            const type = line.find('abbr.d').first().attr('title').trim();
+            const number = line.find('.n_acep').first().text().trim();
+            const type = line.find('.d').first().attr('title').trim();
             let country;
             try {
-              country = line.find('abbr.c').first().attr('title').trim();
+              country = line.find('.c').first().attr('title').trim();
             } catch (e) {
               country = null;
             }
@@ -69,11 +69,11 @@ export class AppService {
             definition = definition.trim();
             resp.meanings.push({ number, type, country, definition });
           } else if (line.hasClass('m')) {
-            const number = line.find('.n_acep').text().trim();
-            const type = line.find('abbr.d').first().attr('title').trim();
+            const number = line.find('.n_acep').first().text().trim();
+            const type = line.find('.d').first().attr('title').trim();
             let country;
             try {
-              country = line.find('abbr.c').first().attr('title').trim();
+              country = line.find('.c').first().attr('title').trim();
             } catch (e) {
               country = null;
             }
