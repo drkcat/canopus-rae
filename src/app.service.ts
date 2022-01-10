@@ -53,10 +53,10 @@ export class AppService {
             idiom = false;
           } else if (line.hasClass('j') || line.hasClass('j2')) {
             const number = line.find('.n_acep').first().text().trim();
-            const type = line.find('.d').first().attr('title').trim();
+            const type = line.find('.d').first().text().trim();
             let country;
             try {
-              country = line.find('.c').first().attr('title').trim();
+              country = line.find('.c').first().text().trim();
             } catch (e) {
               country = null;
             }
@@ -70,10 +70,10 @@ export class AppService {
             resp.meanings.push({ number, type, country, definition });
           } else if (line.hasClass('m')) {
             const number = line.find('.n_acep').first().text().trim();
-            const type = line.find('.d').first().attr('title').trim();
+            const type = line.find('.d').first().text().trim();
             let country;
             try {
-              country = line.find('.c').first().attr('title').trim();
+              country = line.find('.c').first().text().trim();
             } catch (e) {
               country = null;
             }
