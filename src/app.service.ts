@@ -32,8 +32,9 @@ export class AppService {
       const $ = cheerio.load(html);
       const resp: SearchResponse = {
         term,
-        definition: '',
+        etymology: '',
         meanings: [],
+        idioms: [],
         expressions: [],
       };
       const definitions = $('#resultados article').first();
@@ -41,8 +42,9 @@ export class AppService {
       if (lines.length >= 0) {
         lines.each((index) => {
           const line = lines.eq(index);
+          let idiom;
           if (line.hasClass('n2')) {
-            resp.definition = line.text();
+            resp.etymology = line.text();
           } else if (line.hasClass('j') || line.hasClass('j2')) {
             const number = line.find('span').first().text().trim();
             const type = line.find('abbr').first().text().trim();
@@ -52,9 +54,13 @@ export class AppService {
               description += words.eq(index).text() + ' ';
             });
             description = description.trim();
-            resp.meanings.push({ number, type, description });
-          } else if (line.hasClass('k5') || line.hasClass('k6')) {
+            resp.meanings.push({ number, type, definition: description });
+          } else if (line.hasClass('k5')) {
+            resp.idioms.push({ expression: line.text() });
+            idiom = true;
+          } else if (line.hasClass('k6')) {
             resp.expressions.push({ expression: line.text() });
+            idiom = false;
           } else if (line.hasClass('m')) {
             const number = line.find('span').first().text().trim();
             const type = line.find('abbr').first().text().trim();
@@ -64,12 +70,21 @@ export class AppService {
               description += words.eq(index).text() + ' ';
             });
             description = description.trim();
-            resp.expressions[resp.expressions.length - 1] = {
-              ...resp.expressions[resp.expressions.length - 1],
-              number,
-              type,
-              description,
-            };
+            if (idiom) {
+              resp.idioms[resp.idioms.length - 1] = {
+                ...resp.idioms[resp.idioms.length - 1],
+                number,
+                type,
+                definition: description,
+              };
+            } else {
+              resp.expressions[resp.expressions.length - 1] = {
+                ...resp.expressions[resp.expressions.length - 1],
+                number,
+                type,
+                definition: description,
+              };
+            }
           }
         });
       }

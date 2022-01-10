@@ -9,20 +9,21 @@ export interface SearchPayload {
 
 export interface SearchResponse {
   term: string;
-  definition: string;
+  etymology: string;
   meanings: Meaning[];
-  expressions: Expression[];
+  idioms: Idiom[];
+  expressions: Idiom[];
 }
 
 export interface Meaning {
   number: string;
   type: string;
-  description: string;
+  definition: string;
 }
 
-export interface Expression {
+export interface Idiom {
   expression: string;
   number?: string;
   type?: string;
-  description?: string;
+  definition?: string;
 }
