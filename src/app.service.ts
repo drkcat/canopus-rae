@@ -42,15 +42,15 @@ export class AppService {
       if (lines.length >= 0) {
         lines.each((index) => {
           const line = lines.eq(index);
-          let idiom;
+          let isComplexForm;
           if (line.hasClass('n2')) {
             resp.etymology = line.text();
           } else if (line.hasClass('k5')) {
             resp.complexForms.push({ expression: line.text(), meanings: [] });
-            idiom = true;
+            isComplexForm = true;
           } else if (line.hasClass('k6')) {
             resp.expressions.push({ expression: line.text(), meanings: [] });
-            idiom = false;
+            isComplexForm = false;
           } else if (line.hasClass('j') || line.hasClass('j2')) {
             const number = line.find('.n_acep').first().text().trim();
             const type = line.find('.d').first().text().trim();
@@ -83,7 +83,7 @@ export class AppService {
               definition += words.eq(index).text() + ' ';
             });
             definition = definition.trim();
-            if (idiom) {
+            if (isComplexForm) {
               resp.complexForms[resp.complexForms.length - 1].meanings.push({
                 number,
                 type,
