@@ -34,7 +34,7 @@ export class AppService {
         term,
         etymology: '',
         meanings: [],
-        idioms: [],
+        complexForms: [],
         expressions: [],
       };
       const definitions = $('#resultados article').first();
@@ -46,43 +46,58 @@ export class AppService {
           if (line.hasClass('n2')) {
             resp.etymology = line.text();
           } else if (line.hasClass('j') || line.hasClass('j2')) {
-            const number = line.find('span').first().text().trim();
-            const type = line.find('abbr').first().text().trim();
+            const number = line.find('.n_acep').text().trim();
+            const type = line.find('abbr.d').first().attr('title').trim();
+            let country;
+            try {
+              country = line.find('abbr.c').first().attr('title').trim();
+            } catch (e) {
+              country = null;
+            }
+
             const words = line.find('mark');
-            let description = '';
+            let definition = '';
             words.each((index) => {
-              description += words.eq(index).text() + ' ';
+              definition += words.eq(index).text() + ' ';
             });
-            description = description.trim();
-            resp.meanings.push({ number, type, definition: description });
+            definition = definition.trim();
+            resp.meanings.push({ number, type, country, definition });
           } else if (line.hasClass('k5')) {
-            resp.idioms.push({ expression: line.text() });
+            resp.complexForms.push({ expression: line.text() });
             idiom = true;
           } else if (line.hasClass('k6')) {
             resp.expressions.push({ expression: line.text() });
             idiom = false;
           } else if (line.hasClass('m')) {
-            const number = line.find('span').first().text().trim();
-            const type = line.find('abbr').first().text().trim();
+            const number = line.find('.n_acep').text().trim();
+            const type = line.find('abbr.d').first().attr('title').trim();
+            let country;
+            try {
+              country = line.find('abbr.c').first().attr('title').trim();
+            } catch (e) {
+              country = null;
+            }
             const words = line.find('mark');
-            let description = '';
+            let definition = '';
             words.each((index) => {
-              description += words.eq(index).text() + ' ';
+              definition += words.eq(index).text() + ' ';
             });
-            description = description.trim();
+            definition = definition.trim();
             if (idiom) {
-              resp.idioms[resp.idioms.length - 1] = {
-                ...resp.idioms[resp.idioms.length - 1],
+              resp.complexForms[resp.complexForms.length - 1] = {
+                ...resp.complexForms[resp.complexForms.length - 1],
                 number,
                 type,
-                definition: description,
+                country,
+                definition,
               };
             } else {
               resp.expressions[resp.expressions.length - 1] = {
                 ...resp.expressions[resp.expressions.length - 1],
                 number,
                 type,
-                definition: description,
+                country,
+                definition,
               };
             }
           }

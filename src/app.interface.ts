@@ -11,19 +11,21 @@ export interface SearchResponse {
   term: string;
   etymology: string;
   meanings: Meaning[];
-  idioms: Idiom[];
-  expressions: Idiom[];
+  complexForms: Expression[];
+  expressions: Expression[];
 }
 
 export interface Meaning {
   number: string;
   type: string;
+  country?: string | null;
   definition: string;
 }
 
-export interface Idiom {
+export interface Expression {
   expression: string;
   number?: string;
   type?: string;
+  country?: string | null;
   definition?: string;
 }
