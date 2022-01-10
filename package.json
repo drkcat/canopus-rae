@@ -1,7 +1,7 @@
 {
   "name": "canopus-rae",
-  "version": "0.0.1",
-  "description": "RAE microservice no one asked for",
+  "version": "0.0.2",
+  "description": "Spanish dictionary microservice someone might use",
   "author": {
     "name": "ender-null",
     "email": "endernull@icloud.com",
@@ -38,6 +38,7 @@
     "@nestjs/microservices": "^8.2.4",
     "@nestjs/platform-express": "^8.0.0",
     "cache-manager": "^3.6.0",
+    "cheerio": "^1.0.0-rc.10",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"

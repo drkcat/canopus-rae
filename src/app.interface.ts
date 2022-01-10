@@ -6,3 +6,14 @@ export interface ErrorResponse {
 export interface SearchPayload {
   term: string;
 }
+
+export interface SearchResponse {
+  term: string;
+  definitions: Definition[];
+}
+
+export interface Definition {
+  number?: string;
+  type?: string;
+  description: string;
+}
