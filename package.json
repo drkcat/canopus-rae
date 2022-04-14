@@ -1,19 +1,19 @@
 {
   "name": "canopus-rae",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Spanish dictionary microservice someone might use",
   "author": {
     "name": "ender-null",
     "email": "endernull@icloud.com",
     "url": "https://github.com/ender-null"
   },
-  "homepage": "https://github.com/drkcat/canopus-rae",
+  "homepage": "https://github.com/endworks/canopus-rae",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/drkcat/canopus-rae.git"
+    "url": "git+ssh://git@github.com/endworks/canopus-rae.git"
   },
   "bugs": {
-    "url": "https://github.com/drkcat/canopus-rae/issues"
+    "url": "https://github.com/endworks/canopus-rae/issues"
   },
   "license": "MIT",
   "scripts": {
