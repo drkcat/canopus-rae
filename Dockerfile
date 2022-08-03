@@ -23,6 +23,6 @@ RUN yarn --prod
 
 COPY --from=builder /usr/src/app/dist ./dist
 
-EXPOSE 8879/tcp
+EXPOSE 3000/tcp
 
 CMD ["yarn", "run", "start:prod"]
